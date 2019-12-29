@@ -621,8 +621,6 @@ SEM Declaration
                                 | cl <- @qualDers
                                 ]
     loc . qualDers  = map (\x -> setNameRange (convertClassNameToQualified @lhs.qualifiedEnvironment x) (getNameRange x)) @derivings.self
-    
-
 {
 
 createInstance :: Range -> Name -> Type -> ContextItems -> (Range, Instance)

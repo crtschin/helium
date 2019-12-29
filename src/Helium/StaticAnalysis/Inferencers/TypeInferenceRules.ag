@@ -489,7 +489,7 @@ SEM Expression
           . beta         = TVar @lhs.betaDeclUnique
           . newcon       = case M.lookup @name.self (valueConstructors @lhs.importEnvironment) of
                               Nothing            -> []
-                              Just (_, ctp) -> [ (@beta .::. ctp) @cinfo ]
+                              Just (_, ctp) -> [ (@beta .::. convertTpSchemeToQualified @lhs.importEnvironment ctp) @cinfo ]
 
   | RecordConstruction
       recordExpressionBindings . betaConstr = @beta
@@ -670,7 +670,7 @@ SEM Expression
                                  Node [ @conExpr .<. @expression.constraints ]
                  . beta        = TVar @lhs.betaUnique
                  . qualType    = convertTypeToQualified @lhs.importEnvironment @type.self
-                 . typeScheme  = makeTpSchemeFromType @qualType 
+                 . typeScheme  = traceShow (makeTpSchemeFromType @qualType) $ makeTpSchemeFromType @qualType 
                  . conResult   = [ (@beta            .::. @typeScheme) @cinfoResult          ]
                  . conExpr     = [ (@expression.beta !::! @typeScheme) @lhs.monos @cinfoExpr ]
 
@@ -853,7 +853,7 @@ SEM Pattern
                                     (if @patterns.numberOfPatterns == 0  then @cinfoEmpty else @cinfoApply) ]
                . conConstructor = case M.lookup @name.self (valueConstructors @lhs.importEnvironment) of
                                      Nothing            -> []
-                                     Just (_, ctp) -> [ (@betaCon .::. ctp) @cinfoConstructor ]
+                                     Just (_, ctp) -> [ (@betaCon .::. convertTpSchemeToQualified @lhs.importEnvironment ctp) @cinfoConstructor ]
 
   | Record
       recordPatternBindings . betaUnique  = @lhs.betaUnique + 1

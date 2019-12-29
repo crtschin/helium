@@ -72,6 +72,7 @@ SEM Module
                             ( @body.decls ++ @lhs.extraDecls
                             ))
                 body . instanceName = Nothing
+                body . isTopLevel = True
                 loc.exportlists = (@exports.values
                                   , @exports.confieldormethods
                                   , @exports.typeorclasses
@@ -135,7 +136,7 @@ localValuePrims cdecls
 -- Since the parser cannot distinguish between types or constructors,
 -- or between types and type classes, we do not have different cases (yet?).
 
-ATTR Declarations Declaration
+ATTR Body Declarations Declaration
     [   isTopLevel : Bool
     |
     |

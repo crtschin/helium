@@ -53,9 +53,9 @@ instance Ord NameWithRange where
 --------------------------------------------------------------
 
 getNameName :: Name -> String -- !!!Name
-getNameName (Name_Identifier _ qs _ name) = intercalate "." (qs ++ [name])
-getNameName (Name_Operator   _ qs _ name) = intercalate "." (qs ++ [name])
-getNameName (Name_Special    _ qs _ name) = intercalate "." (qs ++ [name])
+getNameName (Name_Identifier _ qs o name) = intercalate "." (qs ++ [name])
+getNameName (Name_Operator   _ qs o name) = intercalate "." (qs ++ [name])
+getNameName (Name_Special    _ qs o name) = intercalate "." (qs ++ [name])
 
 getOnlyName :: Name -> String -- !!!Name
 getOnlyName (Name_Identifier _ _ _ name) = name

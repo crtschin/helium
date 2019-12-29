@@ -318,6 +318,9 @@ setExportsPublic implicit (exports,exportCons,exportData,exportDataCon,exportMod
                                                 && (elemSet name exportData || elemSet name exportDataCon)
                                     || (declKind decl_ `elem` [customInfix] && elemSet name exports)
                                     )
+            DeclTypeSynonym{} -> isExported decl_
+                                    (elemSet name exports)
+
             _               -> internalError "CoreUtils" "setExportsPublic" "We can only deal with Custom, Value, and Con Core.Decl"
 
     isQual decl_ = let name = stringFromId $ declName decl_ in isQualifiedString name
